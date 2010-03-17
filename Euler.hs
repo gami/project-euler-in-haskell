@@ -1,4 +1,4 @@
-module Euler(parseData, triangle, primes, primeFactors, divisor, fib, digitCount)
+module Euler(parseData, triangle, primes, primeFactors, divisor, fib, digits, digitCount)
 
 where
     parseData t = map (\x -> map (\s -> read s::Integer ) (words x)) $ lines t
@@ -48,6 +48,11 @@ where
     fibStep :: (Integer, Integer) -> (Integer, Integer)
     fibStep (u, v) = (v, u+v)
     
+    digits :: Integer -> [Integer]
+    digits n
+        | n < 10 = [n]
+        | otherwise = (digits (truncate ((fromIntegral n)/10)))++[(mod n 10)]
+
     digitCount::String->Integer
     digitCount [] = 0
     digitCount (s:xs) = 1+(digitCount xs)
