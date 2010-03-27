@@ -1,4 +1,4 @@
-module Euler(parseData, triangle, primes, primeFactors, divisor, fib, digits, digitCount, isPaindromic)
+module Euler(parseData, triangle, primes, primeFactors, divisor, fib, digits, digitsn, digitCount, isPaindromic)
 
 where
     parseData t = map (\x -> map (\s -> read s::Integer ) (words x)) $ lines t
@@ -52,7 +52,12 @@ where
     digits n
         | n < 10 = [n]
         | otherwise = (digits (truncate ((fromIntegral n)/10)))++[(mod n 10)]
-
+        
+    digitsn :: Integer -> Integer -> [Integer]
+    digitsn n b
+        | n < b = [n]
+        | otherwise = (digitsn (truncate ((fromIntegral n)/(fromIntegral b))) b)++[(mod n b)]
+            
     digitCount::String->Integer
     digitCount [] = 0
     digitCount (s:xs) = 1+(digitCount xs)
