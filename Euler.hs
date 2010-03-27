@@ -1,4 +1,4 @@
-module Euler(parseData, triangle, primes, primeFactors, divisor, fib, digits, digitCount)
+module Euler(parseData, triangle, primes, primeFactors, divisor, fib, digits, digitCount, isPaindromic)
 
 where
     parseData t = map (\x -> map (\s -> read s::Integer ) (words x)) $ lines t
@@ -56,3 +56,9 @@ where
     digitCount::String->Integer
     digitCount [] = 0
     digitCount (s:xs) = 1+(digitCount xs)
+    
+    isPaindromic :: [Integer] -> Bool
+    isPaindromic ns = isPaindromic' 0 ns (toInteger (length ns))
+    isPaindromic' c ns len
+        | fromIntegral c > (fromIntegral len)/2 = True
+        | otherwise = (ns !! (fromIntegral c)) == (ns !! (fromIntegral (len-(c+1)))) && (isPaindromic' (c+1) ns len)
