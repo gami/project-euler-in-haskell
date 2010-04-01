@@ -1,4 +1,4 @@
-module Euler(parseData, triangle, primes, primeFactors, divisor, fib, digits, digitsn, digitCount, isPaindromic)
+module Euler(parseData, triangle, primes, primeFactors, divisor, fib, digits, digitsn, digitCount, factorial, isPaindromic)
 
 where
     parseData t = map (\x -> map (\s -> read s::Integer ) (words x)) $ lines t
@@ -67,3 +67,7 @@ where
     isPaindromic' c ns len
         | fromIntegral c > (fromIntegral len)/2 = True
         | otherwise = (ns !! (fromIntegral c)) == (ns !! (fromIntegral (len-(c+1)))) && (isPaindromic' (c+1) ns len)
+        
+    factorial :: Integer -> Integer
+    factorial 0 = 1
+    factorial x = x * (factorial (x-1))
