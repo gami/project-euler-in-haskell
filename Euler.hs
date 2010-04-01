@@ -32,11 +32,16 @@ where
     divide a b = truncate( fromIntegral(a) / fromIntegral(b) )
     
     divisor :: Integer -> [Integer]
-    divisor n = [1]++(divisor2 n [2..(n-1)])++[n]
-    divisor2 n [] = []
-    divisor2 n (x:xs) 
-        | (mod n x)==0 = x:divisor2 n xs
-        | otherwise = divisor2 n xs
+    divisor n = [1]++(divisor' n [2..(n-1)])++[n]
+    
+    trueDivisor :: Integer -> [Integer]
+    trueDivisor n = [1]++(divisor' n [2..(n-1)])
+    
+    divisor' n [] = []
+    divisor' n (x:xs) 
+        | (mod n x)==0 = x:divisor' n xs
+        | otherwise = divisor' n xs
+
         
     fib :: Integer -> Integer
     fib n = fst (fibPair n)
