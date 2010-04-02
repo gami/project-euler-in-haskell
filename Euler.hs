@@ -1,4 +1,4 @@
-module Euler(parseData, triangle, primes, primeFactors, divisor, fib, digits, digitsn, digitCount, factorial, isPaindromic)
+module Euler(parseData, triangle, primes, primeFactors, divisor, trueDivisor, fib, digits, digitsn, digitCount, factorial, isPaindromic)
 
 where
     parseData t = map (\x -> map (\s -> read s::Integer ) (words x)) $ lines t
@@ -39,10 +39,10 @@ where
     
     divisor' n [] = []
     divisor' n (x:xs) 
+        | n < x*2 = []
         | (mod n x)==0 = x:divisor' n xs
         | otherwise = divisor' n xs
 
-        
     fib :: Integer -> Integer
     fib n = fst (fibPair n)
 
