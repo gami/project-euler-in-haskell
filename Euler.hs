@@ -1,6 +1,8 @@
-module Euler(parseData, triangle, primes, primeFactors, divisor, trueDivisor, fib, digits, digitsn, digitCount, factorial, isPaindromic)
+module Euler(parseData, triangle, primes, primeFactors, divisor, trueDivisor, fib, digits, digitsn, digitCount, factorial, isPaindromic, unique)
 
 where
+    import List
+    
     parseData t = map (\x -> map (\s -> read s::Integer ) (words x)) $ lines t
     
     triangle :: [[Integer]] -> [[Integer]] -> [[Integer]]
@@ -76,3 +78,11 @@ where
     factorial :: Integer -> Integer
     factorial 0 = 1
     factorial x = x * (factorial (x-1))
+    
+    unique :: [Integer] -> [Integer]
+    unique ax = unique' $ sort ax
+    unique' [] = []
+    unique' (a:ax)
+        | ax == []  = [a]
+        | a == ax!!0   = unique' ax
+        | otherwise = a:(unique' ax)
